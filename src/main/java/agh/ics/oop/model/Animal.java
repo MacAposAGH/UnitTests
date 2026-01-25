@@ -4,7 +4,6 @@ public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position;
 
-
     public Animal(Vector2d location){
         this.position = location;
         this.orientation = MapDirection.NORTH;
@@ -35,7 +34,9 @@ public class Animal {
             case LEFT -> orientation = MapDirection.previous(orientation);
             case FORWARD -> {
                 Vector2d to_add = MapDirection.toUnitVector(orientation);
-                if(position.add(to_add).getX() <= 4 && position.add(to_add).getY() <= 4 && position.add(to_add).getX() >= 0 && position.add(to_add).getY() >= 0){
+                Vector2d add = position.add(to_add);
+                if(position.add(to_add).getX() <= 4 && position.add(to_add).getY() <= 4 &&
+                        position.add(to_add).getX() >= 0 && position.add(to_add).getY() >= 0){
                     position = position.add(to_add);
                 }
             }
