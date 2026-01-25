@@ -14,8 +14,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-
-
+// niepoprawne argumenty
+// puste argumenty
+// 1 zwierzak, więcej zwierzaków
 public class SimulationTest {
     @Test
     void runTest() {

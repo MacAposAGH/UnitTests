@@ -11,7 +11,7 @@ public class Simulation {
     private List<MoveDirection> directions;
     private List<Animal> animals;
     public Simulation(List<Vector2d> positions, List<MoveDirection> directions) {
-        List<Animal> animals = new ArrayList<Animal>();
+        List<Animal> animals = new ArrayList<>();
         for (int i = 0; i < positions.size(); i++){
             animals.add(new Animal(positions.get(i)));
         }
