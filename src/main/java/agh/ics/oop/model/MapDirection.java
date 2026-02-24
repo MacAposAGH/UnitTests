@@ -6,8 +6,8 @@ public enum MapDirection {
     WEST,
     EAST;
 
-    public String toString(MapDirection d){
-        return switch (d){
+    public String toString(MapDirection d) {
+        return switch (d) {
             case EAST -> "Wschód";
             case WEST -> "Zachód";
             case NORTH -> "Północ";
@@ -15,7 +15,7 @@ public enum MapDirection {
         };
     }
 
-    public static MapDirection next(MapDirection d){
+    public static MapDirection next(MapDirection d) {
         return switch (d) {
             case EAST -> SOUTH;
             case SOUTH -> WEST;
@@ -23,7 +23,8 @@ public enum MapDirection {
             case NORTH -> EAST;
         };
     }
-    public static MapDirection previous(MapDirection d){
+
+    public static MapDirection previous(MapDirection d) {
         return switch (d) {
             case EAST -> NORTH;
             case NORTH -> WEST;
@@ -31,8 +32,9 @@ public enum MapDirection {
             case SOUTH -> EAST;
         };
     }
-    public static Vector2d toUnitVector(MapDirection d){
-        return switch (d){
+
+    public static Vector2d toUnitVector(MapDirection d) {
+        return switch (d) {
             case EAST -> new Vector2d(1, 0);
             case WEST -> new Vector2d(-1, 0);
             case NORTH -> new Vector2d(0, 1);

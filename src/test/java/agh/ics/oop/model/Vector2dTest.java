@@ -98,7 +98,7 @@ public class Vector2dTest {
     }
 
     @Test
-    void oppositeTest(){
+    void oppositeTest() {
         Vector2d p0 = new Vector2d(1, 1);
         assertEquals(new Vector2d(-1, -1), p0.opposite());
     }
@@ -121,7 +121,7 @@ public class Vector2dTest {
     }
 
     @Test
-    void insideBoundaryTest(){
+    void insideBoundaryTest() {
         Vector2d p0 = new Vector2d(1, 1);
         Vector2d start1 = new Vector2d(2, 2);
         Vector2d start2 = new Vector2d(0, 2);

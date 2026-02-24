@@ -71,7 +71,7 @@ public class Vector2d {
         return new Vector2d(-x, -y);
     }
 
-//    public boolean equals(Object other){
+    //    public boolean equals(Object other){
 //        if (this == other) return true;
 //        if (!(other instanceof Vector2d)) return false;
 //        Vector2d that = (Vector2d) other;

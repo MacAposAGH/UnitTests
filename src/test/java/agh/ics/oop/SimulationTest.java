@@ -1,18 +1,12 @@
 package agh.ics.oop;
-import agh.ics.oop.model.*;
-import agh.ics.oop.model.Animal;
+
 import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
-import org.junit.jupiter.api.Assertions;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // niepoprawne argumenty
 // puste argumenty
@@ -20,12 +14,12 @@ import org.junit.jupiter.api.Test;
 public class SimulationTest {
     @Test
     void runTest() {
-        
+
         // Pozycje startowe zwierzakow
         List<Vector2d> startingPos = List.of(
-                new Vector2d(2,2),
-                new Vector2d(0,4),
-                new Vector2d(4,0)
+                new Vector2d(2, 2),
+                new Vector2d(0, 4),
+                new Vector2d(4, 0)
         );
 
         // ruchy (kazda kolumna to ruchy jednego zwierzaka)
@@ -38,14 +32,14 @@ public class SimulationTest {
 
         // finalne pozycje
         List<Vector2d> finalPos_0 = List.of(
-                new Vector2d(2,2),
-                new Vector2d(0,4),
-                new Vector2d(4,0)
+                new Vector2d(2, 2),
+                new Vector2d(0, 4),
+                new Vector2d(4, 0)
         );
         List<Vector2d> finalPos_1 = List.of(
-                new Vector2d(2,4),
-                new Vector2d(0,2),
-                new Vector2d(3,0)
+                new Vector2d(2, 4),
+                new Vector2d(0, 2),
+                new Vector2d(3, 0)
         );
 
 

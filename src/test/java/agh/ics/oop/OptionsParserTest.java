@@ -1,24 +1,21 @@
 package agh.ics.oop;
+
 import agh.ics.oop.model.MoveDirection;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
-class OptionsParserTest {
+import static agh.ics.oop.model.MoveDirection.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class OptionsParserTest {
 
     @Test
     void zamianaTest() {
-        String[] input1 = new String[]{"f", "f"};
-        MoveDirection[] output1_s = new MoveDirection[] {MoveDirection.FORWARD, MoveDirection.FORWARD};
-        List<MoveDirection> output1 = Arrays.asList(output1_s);
-
-
-
+        String[] input1 = new String[]{"f", "b", "r", "l"};
+        ArrayList<MoveDirection> output1 = new ArrayList<>(List.of(FORWARD, BACKWARD, RIGHT, LEFT));
+        assertEquals(List.of(), OptionsParser.zamiana(new String[]{}));
         assertEquals(output1, OptionsParser.zamiana(input1));
 
     }
