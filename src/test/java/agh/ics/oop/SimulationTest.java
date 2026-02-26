@@ -1,81 +1,124 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.Vector2d;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static agh.ics.oop.OptionsParser.zamiana;
+import static agh.ics.oop.model.MapDirection.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 // niepoprawne argumenty
 // puste argumenty
 // 1 zwierzak, więcej zwierzaków
 public class SimulationTest {
+//
+
+
+    Vector2d lowerLeft;
+    Vector2d upperRight;
+    Vector2d inside;
+
+    @BeforeEach
+    void setUp() {
+        lowerLeft = new Vector2d(0, 0);
+        inside = new Vector2d(3, 3);
+        upperRight = new Vector2d(4, 4);
+    }
+
     @Test
-    void runTest() {
+    void runTestV2() {
+        String[] moves = {
+                "l",
+                "l", "r",
+                "f", "f",
+                "l", "r",
+                "f", "f",
 
-        // Pozycje startowe zwierzakow
-        List<Vector2d> startingPos = List.of(
-                new Vector2d(2, 2),
-                new Vector2d(0, 4),
-                new Vector2d(4, 0)
-        );
-
-        // ruchy (kazda kolumna to ruchy jednego zwierzaka)
-        String[] moves_0 = {};
-        String[] moves_1 = {
-                "f", "f", "r",
-                "f", "b", "f",
-                "l", "b", "b"
+                "l", "r",
+                "b", "b",
+                "l", "r",
+                "b", "b",
+                "f", "r",
+                "r", "b"
         };
 
-        // finalne pozycje
-        List<Vector2d> finalPos_0 = List.of(
-                new Vector2d(2, 2),
-                new Vector2d(0, 4),
-                new Vector2d(4, 0)
+        List<Vector2d> startingPositions = List.of(upperRight, lowerLeft);
+
+        List<Vector2d> finalPositions = List.of(
+                new Vector2d(4, 3),
+                new Vector2d(0, 1)
         );
-        List<Vector2d> finalPos_1 = List.of(
-                new Vector2d(2, 4),
-                new Vector2d(0, 2),
-                new Vector2d(3, 0)
-        );
+        List<MapDirection> finalOrientations = List.of(NORTH, EAST);
+        List<Animal> finalAnimals = startingPositions.stream().map(Animal::new).toList();
 
+        Simulation simulation = new Simulation(startingPositions, zamiana(moves));
+        List<Animal> animals = simulation.getAnimalList();
 
-        // finalne orientacje
-        List<MapDirection> finalOrient_0 = List.of(
-                MapDirection.NORTH,
-                MapDirection.NORTH,
-                MapDirection.NORTH
-        );
-        List<MapDirection> finalOrient_1 = List.of(
-                MapDirection.WEST,
-                MapDirection.NORTH,
-                MapDirection.EAST
-        );
+        assertIterableEquals(finalAnimals, animals);
 
+        simulation.run();
 
-        Simulation sim_0 = new Simulation(startingPos, OptionsParser.zamiana(moves_0));
-        Simulation sim_1 = new Simulation(startingPos, OptionsParser.zamiana(moves_1));
+        for (int i = 0; i < animals.size(); i++) {
+            Animal animal = animals.get(i);
+            MapDirection orientation = animal.getOrientation();
+            MapDirection finalOrientation = finalOrientations.get(i);
+            Vector2d finalPosition = finalPositions.get(i);
 
-
-        sim_0.run();
-        sim_1.run();
-
-        // testy pozycji
-        for (int i = 0; i < 2; i++) {
-            assertEquals(finalPos_0.get(i), sim_0.getAnimalList().get(i).getPosition());
-            assertEquals(finalPos_1.get(i), sim_1.getAnimalList().get(i).getPosition());
-
+            assertTrue(animal.isAt(finalPosition));
+            assertEquals(finalOrientation, orientation);
+            assertEquals(finalOrientation.toString(finalOrientation), orientation.toString(orientation));
+            assertEquals(finalPosition, animal.getPosition());
+            assertEquals(finalPosition.toString() + " " + finalOrientation, animal.toString());
         }
 
-        // testy orientacji
-        for (int i = 0; i < 2; i++) {
-            assertEquals(finalOrient_0.get(i), sim_0.getAnimalList().get(i).getOrientation());
-            assertEquals(finalOrient_1.get(i), sim_1.getAnimalList().get(i).getOrientation());
+        Animal animalInUpperRight = animals.getFirst();
+        Animal animalInLowerLeft = animals.get(1);
 
+        Vector2d upperRight = animalInUpperRight.getPosition();
+        Vector2d lowerLeft = animalInLowerLeft.getPosition();
+
+        assertNotEquals(new Animal(), animalInLowerLeft);
+        assertNotEquals(animalInUpperRight, animals);
+
+        assertEquals(upperRight, upperRight);
+        assertNotEquals(upperRight, lowerLeft);
+
+    }
+
+    @Test
+    void runTestV3() {
+        String[] moves = {
+                "r",
+                "l", "r",
+                "f", "f",
+                "l", "r",
+                "f", "f",
+        };
+        List<Vector2d> startingPosition = List.of(inside, inside);
+        Vector2d finalPosition = new Vector2d(2, 2);
+        List<Vector2d> finalPositions = List.of(finalPosition, finalPosition);
+        Simulation simulation = new Simulation(startingPosition, zamiana(moves));
+        simulation.run();
+
+        List<Animal> animals = simulation.getAnimalList();
+        List<MapDirection> finalOrientations = List.of(WEST, SOUTH);
+
+
+        for (int i = 0; i < animals.size(); i++) {
+            Animal animal = animals.get(i);
+            MapDirection orientation = animal.getOrientation();
+            MapDirection finalOrientation = finalOrientations.get(i);
+
+            assertTrue(animal.isAt(finalPosition));
+            assertEquals(finalOrientation, orientation);
+            assertEquals(finalOrientation.toString(finalOrientation), orientation.toString(orientation));
+            assertEquals(finalPosition, animal.getPosition());
         }
-
     }
 }

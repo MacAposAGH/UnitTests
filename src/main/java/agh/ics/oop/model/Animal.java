@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position;
@@ -48,5 +50,18 @@ public class Animal {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Animal animal)) {
+            return false;
+        }
+        return orientation == animal.orientation && Objects.equals(position, animal.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orientation, position);
     }
 }

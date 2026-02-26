@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Vector2d {
     private int x;
     private int y;
@@ -46,10 +48,10 @@ public class Vector2d {
     public Vector2d upperRight(Vector2d other) {
         int newX = x;
         int newY = y;
-        if (other.x > x) {
+        if (x < other.x) {
             newX = other.x;
         }
-        if (other.y > y) {
+        if (y < other.y) {
             newY = other.y;
         }
         return new Vector2d(newX, newY);
@@ -58,10 +60,10 @@ public class Vector2d {
     public Vector2d lowerLeft(Vector2d other) {
         int newX = x;
         int newY = y;
-        if (other.x < x) {
+        if (x > other.x ) {
             newX = other.x;
         }
-        if (other.y < y) {
+        if (y > other.y ) {
             newY = other.y;
         }
         return new Vector2d(newX, newY);
@@ -77,6 +79,7 @@ public class Vector2d {
 //        Vector2d that = (Vector2d) other;
 //        return x == that.x && y == that.y;
 //    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,6 +91,13 @@ public class Vector2d {
         Vector2d vector2d = (Vector2d) o;
         return x == vector2d.x && y == vector2d.y;
     }
+
+//    public boolean equals(Object o) {
+//        if (!(o instanceof Vector2d vector2d)) {
+//            return false;
+//        }
+//        return x == vector2d.x && y == vector2d.y;
+//    }
 
     public boolean insideBoundary(Vector2d start, Vector2d finish) {
         if (x >= start.getX() && x <= finish.getX() && y >= start.getY() && y <= finish.getY()) {
