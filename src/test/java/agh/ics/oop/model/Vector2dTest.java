@@ -42,16 +42,10 @@ public class Vector2dTest {
 
     @Test
     void precedesTest() {
-//        Vector2d p1 = new Vector2d(10, 7);
-//        Vector2d p2 = new Vector2d(2, 7);
-//        Vector2d p3 = new Vector2d(10, 3);
-
 //        x > other.x && y > other.y -> false
         assertFalse(inside.precedes(lowerLeft));
 //        x <= other.x && y > other.y -> false
         assertFalse(inside.precedes(lowerRight));
-////        x > other.x && y <= other.y -> false
-//        assertFalse(p1.precedes(p2));
 //        x <= other.x && y <= other.y -> true
         assertTrue(inside.precedes(upperRight));
     }
@@ -76,34 +70,6 @@ public class Vector2dTest {
         assertEquals(inside, upperRight.subtract(unitVector));
     }
 
-//    @Test
-//    void upperRightTest() {
-//        Vector2d p0 = new Vector2d(1, 1);
-//        Vector2d p1 = new Vector2d(0, 0);
-//        Vector2d p2 = new Vector2d(2, 0);
-//        Vector2d p3 = new Vector2d(2, 1);
-//        Vector2d p4 = new Vector2d(2, 2);
-//
-//        assertEquals(p0, p0.upperRight(p1));
-//        assertEquals(p3, p0.upperRight(p2));
-//        assertEquals(p4, p0.upperRight(p4));
-//    }
-//
-//    @Test
-//    void lowerLeftTest() {
-//        Vector2d p0 = new Vector2d(1, 1);
-//        Vector2d p1 = new Vector2d(2, 2);
-//
-//        Vector2d p2 = new Vector2d(0, 2);
-//
-//        Vector2d p3 = new Vector2d(0, 1);
-//        Vector2d p4 = new Vector2d(0, 0);
-//
-//        assertEquals(p0, p0.lowerLeft(p1));
-//        assertEquals(p3, p0.lowerLeft(p2));
-//        assertEquals(p4, p0.lowerLeft(p4));
-//    }
-
     @Test
     void LowerLeftUpperRightTest() {
         assertEquals(inside, inside.upperRight(lowerLeft));
@@ -113,33 +79,37 @@ public class Vector2dTest {
         assertEquals(inside, inside.lowerLeft(upperRight));
         assertNotEquals(inside, inside.lowerLeft(upperLeft));
         assertEquals(lowerLeft, inside.lowerLeft(lowerLeft));
-
 }
 
     @Test
     void oppositeTest() {
-        assertEquals(new Vector2d(-1, -1), unitVector.opposite());
+        assertEquals(new Vector2d(-3, -3), inside.opposite());
     }
 
     @Test
     void equalsTest() {
-        Vector2d p0 = new Vector2d(1, 0);
-        Vector2d p1 = new Vector2d(1, 1);
+        Vector2d p1 = new Vector2d(4, 4);
 
 //        Reflexive
-        assertEquals(unitVector, unitVector);
+        assertEquals(upperRight, upperRight);
 //        Symmetric
-        assertEquals(unitVector, p1);
-//        assertEquals(p1, p7);
+        assertEquals(p1, upperRight);
 
-        assertFalse(unitVector.equals(null));
+        assertFalse(upperRight.equals(null));
 
 //        x != vector2d.x && y == vector2d.y -> false
-        assertNotEquals(unitVector, lowerLeft);
+        assertNotEquals(upperRight, lowerLeft);
 //        x == vector2d.x && y != vector2d.y -> false
-        assertNotEquals(unitVector, p0);
+        assertNotEquals(upperRight, lowerRight);
 //        x == vector2d.x && y == vector2d.y -> true
-        assertEquals(unitVector, p1);
+        assertEquals(upperRight, p1);
+    }
+
+    @Test
+    void hashCodeTest(){
+        Vector2d p1 = new Vector2d(3, 3);
+        assertEquals(inside,p1);
+        assertEquals(inside.hashCode(),p1.hashCode());
     }
 
 //    @Test
@@ -167,14 +137,14 @@ public class Vector2dTest {
     @Test
     void insideBoundaryTestV2() {
 //        false && ...                  -> false
-        assertFalse(inside.insideBoundary(upperRight, upperLeft));
+        assertFalse(inside.insideBoundary(lowerRight, lowerRight));
 //        true && false && ...          -> false
-        assertFalse(inside.insideBoundary(upperLeft, upperLeft));
+        assertFalse(inside.insideBoundary(lowerLeft, lowerLeft));
 //        true && true && false && ...  -> false
-        assertFalse(inside.insideBoundary(upperLeft, unitVector));
-//        true && true && true && false -> false
-        assertFalse(inside.insideBoundary(lowerLeft, unitVector));
-//        true && true && true && true  -> true
+        assertFalse(inside.insideBoundary(upperLeft, lowerRight));
+////        true && true && true && false -> false
+        assertFalse(inside.insideBoundary(lowerLeft, lowerRight));
+////        true && true && true && true  -> true
         assertTrue(inside.insideBoundary(lowerLeft, upperRight));
     }
 }

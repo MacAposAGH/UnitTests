@@ -92,7 +92,12 @@ public class Vector2d {
         return x == vector2d.x && y == vector2d.y;
     }
 
-//    public boolean equals(Object o) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    //    public boolean equals(Object o) {
 //        if (!(o instanceof Vector2d vector2d)) {
 //            return false;
 //        }
