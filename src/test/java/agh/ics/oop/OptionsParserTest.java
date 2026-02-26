@@ -17,6 +17,5 @@ public class OptionsParserTest {
         ArrayList<MoveDirection> output1 = new ArrayList<>(List.of(FORWARD, BACKWARD, RIGHT, LEFT));
         assertEquals(List.of(), OptionsParser.zamiana(new String[]{}));
         assertEquals(output1, OptionsParser.zamiana(input1));
-
     }
 }

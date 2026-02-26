@@ -18,22 +18,17 @@ import static org.junit.jupiter.api.Assertions.*;
 // puste argumenty
 // 1 zwierzak, więcej zwierzaków
 public class SimulationTest {
-    //    Vector2d inside;
     Vector2d lowerLeft;
-    Vector2d upperRight;
     Vector2d lowerRight;
+    Vector2d upperRight;
     Vector2d upperLeft;
-    Vector2d unitVector;
 
     @BeforeEach
     void setUp() {
-//        inside = new Vector2d(3, 3);
         lowerLeft = new Vector2d(0, 0);
-        upperRight = new Vector2d(4, 4);
         lowerRight = new Vector2d(4, 0);
         upperLeft = new Vector2d(0, 4);
-        unitVector = new Vector2d(1, 1);
-
+        upperRight = new Vector2d(4, 4);
     }
 
     @Test
@@ -49,9 +44,7 @@ public class SimulationTest {
                 "l", "r", "r", "l",
                 "b", "l", "b", "r"
         };
-
         List<Vector2d> startingPositions = List.of(lowerLeft, lowerLeft, upperRight, lowerLeft);
-
         List<Vector2d> finalPositions = List.of(
                 new Vector2d(0, 0),
                 new Vector2d(2, 2),
@@ -65,7 +58,6 @@ public class SimulationTest {
         List<Animal> animals = simulation.getAnimalList();
 
         assertIterableEquals(finalAnimals, animals);
-
         simulation.run();
 
         for (int i = 0; i < animals.size(); i++) {
@@ -98,8 +90,6 @@ public class SimulationTest {
         assertEquals(firstAnimalInTheMiddle, secondAnimalInTheMiddle);
         assertEquals(firstAnimalInTheMiddle.hashCode(), secondAnimalInTheMiddle.hashCode());
 
-        assertEquals(new Vector2d(-4, -4), upperRight.opposite());
-
         assertEquals(upperRight, upperRight);
         assertFalse(upperRight.equals(null));
         assertNotEquals(upperRight, lowerLeft);
@@ -121,11 +111,12 @@ public class SimulationTest {
         assertNotEquals(middle, middle.lowerLeft(upperLeft));
         assertEquals(lowerLeft, middle.lowerLeft(lowerLeft));
 
+        assertEquals(new Vector2d(-4, -4), upperRight.opposite());
+
         assertFalse(middle.insideBoundary(lowerRight, lowerRight));
         assertFalse(middle.insideBoundary(lowerLeft, lowerLeft));
         assertFalse(middle.insideBoundary(upperLeft, lowerRight));
         assertFalse(middle.insideBoundary(lowerLeft, lowerRight));
         assertTrue(middle.insideBoundary(lowerLeft, upperRight));
     }
-
 }

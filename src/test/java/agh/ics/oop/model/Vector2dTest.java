@@ -22,7 +22,6 @@ public class Vector2dTest {
         lowerRight = new Vector2d(4, 0);
         upperLeft = new Vector2d(0, 4);
         unitVector = new Vector2d(1, 1);
-
     }
 
     @Test
@@ -69,14 +68,6 @@ public class Vector2dTest {
         assertEquals(inside, inside.lowerLeft(upperRight));
         assertNotEquals(inside, inside.lowerLeft(upperLeft));
         assertEquals(lowerLeft, inside.lowerLeft(lowerLeft));
-    }
-
-    @Test
-    void upperRightTest() {
-        assertEquals(inside, inside.upperRight(lowerLeft));
-        assertNotEquals(inside, inside.upperRight(lowerRight));
-        assertEquals(upperRight, inside.upperRight(upperRight));
-
     }
 
     @Test

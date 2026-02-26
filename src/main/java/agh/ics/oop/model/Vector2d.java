@@ -24,17 +24,11 @@ public class Vector2d {
     }
 
     public boolean precedes(Vector2d other) {
-        if (x <= other.x && y <= other.y) {
-            return true;
-        }
-        return false;
+        return x <= other.x && y <= other.y;
     }
 
     public boolean follows(Vector2d other) {
-        if (x >= other.x && y >= other.y) {
-            return true;
-        }
-        return false;
+        return x >= other.x && y >= other.y;
     }
 
     public Vector2d add(Vector2d other) {
@@ -73,13 +67,6 @@ public class Vector2d {
         return new Vector2d(-x, -y);
     }
 
-    //    public boolean equals(Object other){
-//        if (this == other) return true;
-//        if (!(other instanceof Vector2d)) return false;
-//        Vector2d that = (Vector2d) other;
-//        return x == that.x && y == that.y;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -97,17 +84,7 @@ public class Vector2d {
         return Objects.hash(x, y);
     }
 
-    //    public boolean equals(Object o) {
-//        if (!(o instanceof Vector2d vector2d)) {
-//            return false;
-//        }
-//        return x == vector2d.x && y == vector2d.y;
-//    }
-
     public boolean insideBoundary(Vector2d start, Vector2d finish) {
-        if (x >= start.getX() && x <= finish.getX() && y >= start.getY() && y <= finish.getY()) {
-            return true;
-        }
-        return false;
+        return x >= start.getX() && x <= finish.getX() && y >= start.getY() && y <= finish.getY();
     }
 }
