@@ -54,10 +54,10 @@ public class Vector2d {
     public Vector2d lowerLeft(Vector2d other) {
         int newX = x;
         int newY = y;
-        if (x > other.x ) {
+        if (x > other.x) {
             newX = other.x;
         }
-        if (y > other.y ) {
+        if (y > other.y) {
             newY = other.y;
         }
         return new Vector2d(newX, newY);
