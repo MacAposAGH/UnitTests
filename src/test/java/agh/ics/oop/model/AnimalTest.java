@@ -13,13 +13,16 @@ public class AnimalTest {
     Vector2d upperRight;
     Animal animalInLowerLeft;
     Animal animalInUpperRight;
-
+    Animal animal1;
+    Animal animal2;
     @BeforeEach
     void setUp() {
         lowerLeft = new Vector2d(0, 0);
         upperRight = new Vector2d(4, 4);
         animalInLowerLeft = new Animal(lowerLeft);
         animalInUpperRight = new Animal(upperRight);
+        animal1 = new Animal(new Vector2d(0, 0));
+        animal2 = new Animal(new Vector2d(0, 4), MapDirection.SOUTH);
     }
 
     @Test
@@ -60,5 +63,19 @@ public class AnimalTest {
         animalInUpperRight.move(RIGHT);
         animalInUpperRight.move(BACKWARD);
         assertEquals(new Vector2d(4, 3), animalInUpperRight.getPosition());
+    }
+
+    @Test
+    void equalsTest() {
+        assertNotEquals(animalInLowerLeft, lowerLeft);
+        Animal animal2 = new Animal(new Vector2d(0, 4), MapDirection.SOUTH);
+        assertNotEquals(animal2, animalInLowerLeft);
+        assertEquals(animalInLowerLeft, animal1);
+    }
+
+    @Test
+    void hashCodeTest() {
+        assertEquals(animalInLowerLeft, animal1);
+        assertEquals(animalInLowerLeft.hashCode(), animal1.hashCode());
     }
 }

@@ -71,6 +71,13 @@ public class Vector2dTest {
     }
 
     @Test
+    void upperRightTest() {
+        assertEquals(inside, inside.upperRight(lowerLeft));
+        assertNotEquals(inside, inside.upperRight(lowerRight));
+        assertEquals(upperRight, inside.upperRight(upperRight));
+    }
+
+    @Test
     void oppositeTest() {
         assertEquals(new Vector2d(-3, -3), inside.opposite());
     }

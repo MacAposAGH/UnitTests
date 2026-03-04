@@ -86,6 +86,7 @@ public class SimulationTest {
 
         assertNotEquals(animalInLowerLeft, animalInUpperRight);
         assertNotEquals(new Animal(), animalInUpperRight);
+        assertNotEquals(new Animal(new Vector2d(4,4), NORTH), animalInUpperRight);
         assertNotEquals(animalInUpperRight, animals);
         assertEquals(firstAnimalInTheMiddle, secondAnimalInTheMiddle);
         assertEquals(firstAnimalInTheMiddle.hashCode(), secondAnimalInTheMiddle.hashCode());
